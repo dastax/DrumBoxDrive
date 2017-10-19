@@ -1,0 +1,9 @@
+<!DOCTYPE RCC>
+<RCC version="1.0">
+ <qresource>
+  <file alias="logo">pics/injector.png</file>
+  <file alias="staxaudio">pics/drumboxdrive_logo.png</file>
+  <file alias="exit">pics/exit.png</file>
+  <file alias="qss">style.qss</file>
+ </qresource>
+</RCC>

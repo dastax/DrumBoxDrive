@@ -1,0 +1,91 @@
+DrumBoxDrive, QDialog{
+	background:qlineargradient(x1:0, y1:0, x2:2, y2:1,
+			stop: 0 black, stop: 1 darkgray);
+	color:white; 
+}
+QLabel{
+	color: white;
+}
+QPushButton{
+	background:qlineargradient(x1:0, y1:0, x2:1, y2:1,
+			stop: 0 black, stop: 1.0 darkgray);
+	color:white; 
+	border: 2px outset gray;
+	border-radius:10px;
+	padding: 4px;
+}
+QPushButton:focus{
+	border-color: lightgrey;
+}
+QPushButton:pressed {
+    border-style: inset;
+}
+QGroupBox {
+	border: 2px inset gray;
+	border-radius: 10px;
+	font-weight: bold;
+	margin-top: 5px;
+	padding:10px;
+}
+QGroupBox::title {
+	color: white;
+	subcontrol-origin: margin;
+	subcontrol-position: top center; /* position at the top center */
+    	padding: 4px;
+	padding-top:0;
+}
+
+QLineEdit {
+	border: 2px solid gray;
+	border-radius: 10px;
+	background:qlineargradient(x1:0, y1:0, x2:1, y2:1,
+			stop: 0 black, stop: 1.0 darkgray);
+	color:white; 
+	selection-background-color: darkgray;
+}
+QLineEdit:focus {
+	border-color: lightgrey;
+}
+QListWidget {
+	border: 2px solid gray;
+	border-radius: 10px;
+	background:qlineargradient(x1:0, y1:0, x2:1, y2:1,
+			stop: 0 black, stop: 1.0 darkgray);
+	color:white;
+	selection-background-color: darkgray;
+}
+QLineEdit:focus {
+	border-color: lightgrey;
+}
+
+MidiInputBox {
+	color: white;
+}
+MidiOutputBox {
+	color: white;
+}
+QComboBox {
+	color: white;
+	background:qlineargradient(x1:0, y1:0, x2:1, y2:1,
+			stop: 0 black, stop: 1.0 darkgray);
+	selection-color: black;
+	selection-background-color: white;
+	border: 1px outset gray;
+	padding: 2px;
+}
+QComboBox:focus {
+	border-color: lightgrey;
+}
+QComboBox QAbstractItemView {
+	color: white;
+	background:qlineargradient(x1:0, y1:0, x2:1, y2:1,
+			stop: 0 black, stop: 1.0 darkgray);
+	selection-color: black;
+	selection-background-color: white;
+	padding: 2px;
+}
+QScrollBar {
+	color: white;
+	background:qlineargradient(x1:0, y1:0, x2:1, y2:1,
+			stop: 0 black, stop: 1.0 darkgray);
+}
