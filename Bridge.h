@@ -23,14 +23,7 @@ const QString TEXT_NEW_PORT = "(Create new port)";
 #define NAME_MIDI_IN "MIDI->Serial"
 #define NAME_MIDI_OUT "Serial->MIDI"
 
-// SYSEX REQUESTS
-#define SAVE_BOX_CONFIG		1
-#define SAVE_BOX_PATTERNS	2
-#define LOAD_BOX_CONFIG		3
-#define LOAD_BOX_PATTERNS	4
-
 unsigned getEncodeSysExLength(unsigned inLength);
-QByteArray encodeSysEx(QByteArray msg, uint8_t action);
 QByteArray encodeSysEx(QByteArray in);
 
 unsigned getDecodeSysExLength(unsigned inLength);
@@ -43,17 +36,13 @@ class Bridge : public QObject
 public:
   explicit Bridge();
   void attach(QString serialName, JackClient *jack, QThread *workerThread);
+
+  // send a sysex msg (msg is encoded, start and stop byte are added)
+  void sendSysEx(QByteArray msg);
   
   // Destroying an existing Bridge will cleanup state & release all ports
   ~Bridge();
-	   
-public slots:
-    void queryConfigSave();
-    void queryConfigLoad(QByteArray conf);
-  
-    void queryPatternSave();
-    void queryPatternLoad(QByteArray conf);
-  
+	     
 signals:
   // Signals to push user status messages
   void displayMessage(QString message);

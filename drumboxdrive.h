@@ -6,9 +6,9 @@
  * Maintainer: 
  * Created: ven nov 20 23:05:39 2009 (+0100)
  * Version: 
- * Last-Updated: sam. oct. 14 02:04:21 2017 (+0200)
+ * Last-Updated: jeu. déc.  7 19:13:09 2017 (+0100)
  *           By: stax
- *     Update #: 49
+ *     Update #: 58
  * URL: 
  * Keywords: 
  * Compatibility: 
@@ -50,6 +50,14 @@
 #include "jack_engine.h"
 #include "Bridge.h"
 
+// SYSEX REQUESTS
+#define BOX_READY		42
+#define SAVE_BOX_CONFIG		1
+#define SAVE_BOX_PATTERNS	2
+#define SAVE_BOX_PHRASES	3
+#define LOAD_BOX_CONFIG		4
+#define LOAD_BOX_PATTERNS	5
+#define LOAD_BOX_PHRASES	6
 
 class DrumBoxDrive : public QWidget
 {
@@ -96,8 +104,13 @@ private:
 
   void paintEvent(QPaintEvent *);
 
-  bool saveBoxConf(QString path, QByteArray sysex);
+  bool saveBoxConfig(QString path, QByteArray sysex);
   bool saveBoxPatterns(QString path, QByteArray sysex);
+  bool saveBoxPhrases(QString path, QByteArray sysex);
+
+  void loadBoxConfig(QString path);
+  void loadBoxPatterns(QString path);
+  void loadBoxPhrases(QString path);
 
   bool gotPresetDirectory();
 

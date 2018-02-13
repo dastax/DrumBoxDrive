@@ -83,18 +83,6 @@ QByteArray decodeSysEx(QByteArray in)
   return out;
 }
 
-QByteArray encodeSysEx(QByteArray msg, uint8_t action) {
-  msg.prepend(action);
-  msg.prepend(42);
-
-  QByteArray data=encodeSysEx(msg);
-  
-  data.prepend(MSG_SYSEX_START);
-  data.append(MSG_SYSEX_END);
-  return data;
-}
-
-
 // return the number of data bytes for a given message status byte
 #define UNKNOWN_MIDI -2
 static int get_data_length(int status) {
@@ -255,65 +243,15 @@ void Bridge::onSerialAvailable()
     }
 }
 
-void Bridge::queryConfigSave() {
-  /*
-  QByteArray msg;
-  msg.append(MSG_SYSEX_START);
-  msg.append(42);
-  msg.append(SAVE_BOX_CONFIG);
-  msg.append(MSG_SYSEX_END);
-  */
+void Bridge::sendSysEx(QByteArray sysex) {
   if(serial && serial->isOpen()) {
-    QByteArray data=encodeSysEx(QByteArray(), SAVE_BOX_CONFIG);
+    QByteArray data=encodeSysEx(sysex);  
+    data.prepend(MSG_SYSEX_START);
+    data.append(MSG_SYSEX_END);
     serial->write(data);
     serial->flush();
   }
 }
-void Bridge::queryConfigLoad(QByteArray conf) {
-  /*
-  conf.prepend(LOAD_BOX_CONFIG);
-  conf.prepend(42);
-  conf.prepend(MSG_SYSEX_START);
-  conf.append(MSG_SYSEX_END);
-  */
-  if(serial && serial->isOpen()) {
-    QByteArray data=encodeSysEx(conf, LOAD_BOX_CONFIG);
-    serial->write(data);
-    serial->flush();
-  }
-}
-
-void Bridge::queryPatternSave() {
-  /*
-  QByteArray msg;
-  msg.append(MSG_SYSEX_START);
-  msg.append(42);
-  msg.append(SAVE_BOX_PATTERNS);
-  msg.append(MSG_SYSEX_END);
-  */
-  if(serial && serial->isOpen()) {
-    QByteArray data=encodeSysEx(QByteArray(), SAVE_BOX_PATTERNS);
-    serial->write(data);
-    serial->flush();
-  }
-}
-void Bridge::queryPatternLoad(QByteArray conf) {
-  /*
-  conf.prepend(LOAD_BOX_PATTERNS);
-  conf.prepend(42);
-  uint8_t ndata[1024];
-  unsigned len=encodeSysEx((unsigned char*)conf.data(), ndata, conf.size());
-  QByteArray data((char*)ndata, len);
-  data.prepend(MSG_SYSEX_START);
-  data.append(MSG_SYSEX_END);
-  */
-  if(serial && serial->isOpen()) {
-    QByteArray data=encodeSysEx(conf, LOAD_BOX_PATTERNS);    
-    serial->write(data);
-    serial->flush();
-  }
-}
-
 
 void Bridge::onStatusByte(uint8_t byte) {
   if(byte == MSG_SYSEX_END && bufferStartsWith(MSG_SYSEX_START)) {
